@@ -13,7 +13,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Intent intent = getIntent();
-        String message= intent.getStringExtra("radioChosen");
+        String message= intent.getStringExtra(StartActivity.EXTRA_MESSAGE);
         TextView textview = (TextView) findViewById(R.id.textView);
         textview.setText(message);
     }

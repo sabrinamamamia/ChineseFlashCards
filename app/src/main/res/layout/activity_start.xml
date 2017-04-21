@@ -32,20 +32,24 @@
             android:id="@+id/english_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:paddingRight="10dp"
             android:text="@string/english" />
         <RadioButton
             android:id="@+id/pinyin_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/pinyin"
             android:paddingRight="10dp"/>
+
         <RadioButton
             android:id="@+id/chinese_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/chinese"
-            android:paddingRight="10dp"/>
+            android:onClick="onRadioButtonClicked"
+            android:paddingRight="10dp"
+            android:text="@string/chinese" />
     </RadioGroup>
 
     <TextView
@@ -76,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:onClick="onRadioButtonClicked"
+        android:onClick="onButtonClicked"
         android:text="@string/start_quiz"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
