@@ -43,19 +43,19 @@ public class GameActivity extends AppCompatActivity {
         //English
         if (radioIdx == 0) {
             textview.setText(dictionary.get(randWord).getEnglishWord().word);
-            setButtonVal(buttonList, "english", randWord, correctButton);
+            setOptionVal(buttonList, "english", randWord, correctButton);
         }
 
         //Pinyin
         else if (radioIdx == 1) {
             textview.setText(dictionary.get(randWord).getPinyinWord().word);
-            setButtonVal(buttonList, "pinyin", randWord, correctButton);
+            setOptionVal(buttonList, "pinyin", randWord, correctButton);
         }
 
         //Chinese
         else if (radioIdx == 2) {
             textview.setText(dictionary.get(randWord).getChineseWord().word);
-            setButtonVal(buttonList, "chinese", randWord, correctButton);
+            setOptionVal(buttonList, "chinese", randWord, correctButton);
         }
     }
 
@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void setButtonVal(ArrayList<TextView>list, String type, int dictIdx, int correctIdx) {
+    public void setOptionVal(ArrayList<TextView>list, String type, int dictIdx, int correctIdx) {
 
         String option = " ";
         if (type == "english") {
