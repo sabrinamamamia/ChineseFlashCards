@@ -26,20 +26,10 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                dictionaryReader("http://people.cs.georgetown.edu/~bk620/chidi.txt");
-//            }
-//        }.start();
 
         readDictionary task = new readDictionary();
         task.execute();
-        int x = 8;
-
-
         System.out.println(dictionary);
-
     }
 
     private class readDictionary extends AsyncTask<Void, Void, Void>
@@ -83,53 +73,8 @@ public class StartActivity extends AppCompatActivity {
             return null;
         }
 
-//        @Override
-//        protected void onPostExecute(ArrayList<DictionaryWord> tempDict) {
-//            dictionary = (ArrayList<DictionaryWord>)tempDict.clone();
-//        }
     }
 
-
-    public void dictionaryReader(String fileName)
-    {
-        try {
-            URL url = new URL(fileName);
-//            URLConnection yc = url.openConnection();
-//            InputStream inputStream = url.openStream();
-
-//
-//            Scanner in = new Scanner(new BufferedReader(new InputStreamReader(yc.getInputStream())));
-
-//            BufferedReader read = new BufferedReader(new InputStreamReader(url.openStream()));
-//
-            Scanner in = new Scanner(new BufferedReader(new InputStreamReader(url.openStream())));
-
-            String chinese;
-            String pinyin;
-            String english;
-            String deliminator;
-
-            while (in.hasNextLine()) {
-                chinese = in.next();
-                deliminator = in.next();
-                pinyin = in.next();
-                deliminator = in.next();
-                english = in.next();
-
-                DictionaryWord word = new DictionaryWord();
-                word.chineseWord.setWord(chinese);
-                word.pinyinWord.setWord(pinyin);
-                word.englishWord.setWord(english);
-                dictionary.add(word);
-            }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void onButtonClicked(View view) {
 
