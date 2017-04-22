@@ -93,8 +93,8 @@ public class StartActivity extends AppCompatActivity {
 
         //Send index to GameActivity
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(RADIO_CHOSEN, radioIdxString);
-        intent.putExtra(QUESTION_NUM, questionNumString);
+        intent.putExtra(RADIO_CHOSEN, radioIdx);
+        intent.putExtra(QUESTION_NUM, questionNum);
         startActivity(intent);
     }
 }
@@ -115,23 +115,18 @@ class DictionaryWord
     public Word getChineseWord() {
         return chineseWord;
     }
-
     public void setChineseWord(Word chineseWord) {
         this.chineseWord = chineseWord;
     }
-
     public Word getPinyinWord() {
         return pinyinWord;
     }
-
     public void setPinyinWord(Word pinyinWord) {
         this.pinyinWord = pinyinWord;
     }
-
     public Word getEnglishWord() {
         return englishWord;
     }
-
     public void setEnglishWord(Word englishWord) {
         this.englishWord = englishWord;
     }

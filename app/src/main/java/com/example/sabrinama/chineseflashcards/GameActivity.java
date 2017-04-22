@@ -14,14 +14,18 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Intent intent = getIntent();
+        Integer radioIdx = intent.getIntExtra(StartActivity.RADIO_CHOSEN, -1);  //-1 is default val
+        Integer questionNum = intent.getIntExtra(StartActivity.QUESTION_NUM,-1);
 
-        String message = intent.getStringExtra(StartActivity.RADIO_CHOSEN);
-        TextView textview = (TextView) findViewById(R.id.textView);
-        textview.setText(message);
+        if (radioIdx == 0) {
 
-        String message2 = intent.getStringExtra(StartActivity.QUESTION_NUM);
-        TextView textview2 = (TextView) findViewById(R.id.textView2);
-        textview2.setText(message2);
+        }
+        else if (radioIdx == 1) {
+
+        }
+        else if (radioIdx == 2) {
+
+        }
 
     }
 

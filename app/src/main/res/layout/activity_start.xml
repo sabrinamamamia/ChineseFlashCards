@@ -32,14 +32,12 @@
             android:id="@+id/english_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:paddingRight="10dp"
             android:text="@string/english" />
         <RadioButton
             android:id="@+id/pinyin_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="@string/pinyin"
             android:paddingRight="10dp"/>
 
@@ -47,7 +45,6 @@
             android:id="@+id/chinese_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:paddingRight="10dp"
             android:text="@string/chinese" />
     </RadioGroup>
