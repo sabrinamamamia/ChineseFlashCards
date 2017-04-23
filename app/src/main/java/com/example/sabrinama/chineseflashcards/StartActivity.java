@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 
 import java.io.BufferedReader;
@@ -29,7 +30,11 @@ public class StartActivity extends AppCompatActivity {
 
         readDictionary task = new readDictionary();
         task.execute();
-        System.out.println(dictionary);
+
+        NumberPicker numPick = (NumberPicker) findViewById(R.id.quizSize_Picker);
+        numPick.setMinValue(1);
+        numPick.setMaxValue(10);
+        numPick.setWrapSelectorWheel(true);
     }
 
     private class readDictionary extends AsyncTask<Void, Void, Void>
@@ -87,87 +92,16 @@ public class StartActivity extends AppCompatActivity {
 
         //Get number of questions
         //Todo: Bounds checking? Notify user if selected too few/many cards
-        EditText editText = (EditText) findViewById(R.id.question_count_editText);
-        int questionNum = Integer.parseInt(editText.getText().toString());
-        String questionNumString = String.valueOf(questionNum);
+        //EditText editText = (EditText) findViewById(R.id.question_count_editText);
+        NumberPicker numPick = (NumberPicker) findViewById(R.id.quizSize_Picker);
+        //int questionNum = Integer.parseInt(editText.getText().toString());
+        int qn = Integer.parseInt(String.valueOf(numPick.getValue()));
+        //String questionNumString = String.valueOf(questionNum);
 
         //Send index to GameActivity
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(RADIO_CHOSEN, radioIdx);
-        intent.putExtra(QUESTION_NUM, questionNum);
+        intent.putExtra(QUESTION_NUM, qn);
         startActivity(intent);
-    }
-}
-
-class DictionaryWord
-{
-    Word chineseWord;
-    Word pinyinWord;
-    Word englishWord;
-
-    public DictionaryWord()
-    {
-        chineseWord = new Word();
-        pinyinWord = new Word();
-        englishWord = new Word();
-    }
-
-    public Word getChineseWord() {
-        return chineseWord;
-    }
-    public void setChineseWord(Word chineseWord) {
-        this.chineseWord = chineseWord;
-    }
-    public Word getPinyinWord() {
-        return pinyinWord;
-    }
-    public void setPinyinWord(Word pinyinWord) {
-        this.pinyinWord = pinyinWord;
-    }
-    public Word getEnglishWord() {
-        return englishWord;
-    }
-    public void setEnglishWord(Word englishWord) {
-        this.englishWord = englishWord;
-    }
-
-
-}
-
-class Word {
-    String word;
-    int numCorrect;
-    int numTried;
-
-    public Word()
-    {
-        word = "";
-        numCorrect = 0;
-        numTried = 0;
-    }
-
-    double lastTestTime = System.nanoTime();
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public int getNumCorrect() {
-        return numCorrect;
-    }
-
-    public void setNumCorrect(int numCorrect) {
-        this.numCorrect = numCorrect;
-    }
-
-    public int getNumTried() {
-        return numTried;
-    }
-
-    public void setNumTried(int numTried) {
-        this.numTried = numTried;
     }
 }

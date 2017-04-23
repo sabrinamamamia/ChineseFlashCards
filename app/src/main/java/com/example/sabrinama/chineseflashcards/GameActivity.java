@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static com.example.sabrinama.chineseflashcards.StartActivity.dictionary;
+
 public class GameActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +22,9 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Integer radioIdx = intent.getIntExtra(StartActivity.RADIO_CHOSEN, -1);  //-1 is default val
         Integer questionNum = intent.getIntExtra(StartActivity.QUESTION_NUM,-1);
+
+
+
 
         if (radioIdx == 0) {
 
@@ -28,5 +37,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
 
 }
