@@ -8,6 +8,7 @@ public class DictionaryWord {
         Word chineseWord;
         Word pinyinWord;
         Word englishWord;
+        int numTried;
 
         public DictionaryWord()
         {
@@ -34,4 +35,10 @@ public class DictionaryWord {
         public void setEnglishWord(Word englishWord) {
             this.englishWord = englishWord;
         }
+        public int getNumTried() {
+        return numTried;
+    }
+        public void setNumTried(int numTried) {
+        this.numTried = numTried;
+    }
 }

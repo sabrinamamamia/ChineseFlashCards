@@ -7,15 +7,14 @@ package com.example.sabrinama.chineseflashcards;
 public class Word {
         String word;
         int numCorrect;
-        int numTried;
-        double lastTestTime = System.nanoTime();
+
+        double lastTestTime;
 
         public Word()
         {
             word = "";
             numCorrect = 0;
-            numTried = 0;
-
+            lastTestTime = 0;
         }
 
 
@@ -35,12 +34,7 @@ public class Word {
             this.numCorrect = numCorrect;
         }
 
-        public int getNumTried() {
-            return numTried;
-        }
+        public double getLastTestTime() {return lastTestTime;}
 
-        public void setNumTried(int numTried) {
-            this.numTried = numTried;
-        }
-
+        public void setLastTestTime(double lastTestTime) {this.lastTestTime = lastTestTime;}
 }
