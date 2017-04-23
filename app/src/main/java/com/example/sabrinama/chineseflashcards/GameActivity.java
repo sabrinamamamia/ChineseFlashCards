@@ -10,8 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-
 import static com.example.sabrinama.chineseflashcards.StartActivity.dictionary;
 
 public class GameActivity extends AppCompatActivity {
@@ -31,40 +29,6 @@ public class GameActivity extends AppCompatActivity {
         Integer questionNum = intent.getIntExtra(StartActivity.QUESTION_NUM,-1);
 
         createScreen(radioIdx,questionNum);
-    }
-
-    public void onOptionClicked(View view) {
-
-        int buttonId = -1;
-
-        if (view.getId() == findViewById(R.id.button0).getId()) { buttonId = 0; }
-        if (view.getId() == findViewById(R.id.button1).getId()) { buttonId = 1; }
-        if (view.getId() == findViewById(R.id.button2).getId()) { buttonId = 2; }
-        if (view.getId() == findViewById(R.id.button3).getId()) { buttonId = 3; }
-
-        if (buttonId == getCorrectOption()) {
-            //TODO: Button size gets slightly bigger when color changes
-            view.setBackgroundColor(Color.parseColor("#00ff00"));
-        }
-        else {
-            view.setBackgroundColor(Color.parseColor("#ff0000"));
-            if (getCorrectOption() == 0) {
-                Button button0 = (Button) findViewById(R.id.button0);
-                button0.setBackgroundColor(Color.parseColor("#00ff00"));
-            }
-            if (getCorrectOption() == 1) {
-                Button button1 = (Button) findViewById(R.id.button1);
-                button1.setBackgroundColor(Color.parseColor("#00ff00"));
-            }
-            if (getCorrectOption() == 2) {
-                Button button2 = (Button) findViewById(R.id.button2);
-                button2.setBackgroundColor(Color.parseColor("#00ff00"));
-            }
-            if (getCorrectOption() == 3) {
-                Button button3 = (Button) findViewById(R.id.button3);
-                button3.setBackgroundColor(Color.parseColor("#00ff00"));
-            }
-        }
     }
 
     public int createScreen(int radioIdx, int questionNum) {
@@ -134,6 +98,40 @@ public class GameActivity extends AppCompatActivity {
                         dictionary.get(a).getChineseWord().word;
             }
             list.get(i).setText(option);
+        }
+    }
+
+    public void onOptionClicked(View view) {
+
+        int buttonId = -1;
+
+        if (view.getId() == findViewById(R.id.button0).getId()) { buttonId = 0; }
+        if (view.getId() == findViewById(R.id.button1).getId()) { buttonId = 1; }
+        if (view.getId() == findViewById(R.id.button2).getId()) { buttonId = 2; }
+        if (view.getId() == findViewById(R.id.button3).getId()) { buttonId = 3; }
+
+        if (buttonId == getCorrectOption()) {
+            //TODO: Button size gets slightly bigger when color changes
+            view.setBackgroundColor(Color.parseColor("#00ff00"));
+        }
+        else {
+            view.setBackgroundColor(Color.parseColor("#ff0000"));
+            if (getCorrectOption() == 0) {
+                Button button0 = (Button) findViewById(R.id.button0);
+                button0.setBackgroundColor(Color.parseColor("#00ff00"));
+            }
+            if (getCorrectOption() == 1) {
+                Button button1 = (Button) findViewById(R.id.button1);
+                button1.setBackgroundColor(Color.parseColor("#00ff00"));
+            }
+            if (getCorrectOption() == 2) {
+                Button button2 = (Button) findViewById(R.id.button2);
+                button2.setBackgroundColor(Color.parseColor("#00ff00"));
+            }
+            if (getCorrectOption() == 3) {
+                Button button3 = (Button) findViewById(R.id.button3);
+                button3.setBackgroundColor(Color.parseColor("#00ff00"));
+            }
         }
     }
 }
