@@ -35,7 +35,7 @@ public class StartActivity extends AppCompatActivity {
         }
         NumberPicker numPick = (NumberPicker) findViewById(R.id.quizSize_Picker);
         numPick.setMinValue(1);
-        numPick.setMaxValue(24);
+        numPick.setMaxValue(28);
         numPick.setValue(10);
         numPick.setWrapSelectorWheel(true);
     }
