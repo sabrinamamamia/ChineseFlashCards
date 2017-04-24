@@ -9,17 +9,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static com.example.sabrinama.chineseflashcards.StartActivity.dictionary;
 
 public class GameActivity extends AppCompatActivity {
+    public static final String TIME = "com.example.sabrinama.chineseflashcards.TIME";
+    public static final String NUM_QUESTION = "com.example.sabrinama.chineseflashcards.QUESTIONNUM";
+    public static final String CORRECT = "com.example.sabrinama.chineseflashcards.NUMCORRECT";
+    boolean isCorrect1 = false;
+    boolean isCorrect2 = false;
 
     int correctOption;
     int correctOption2;
     int currentWord;
     int radioIdx;
     int numQuestions;
+    static int numCorrect = 0;
+    Integer questionNum;
+    double startTime;
+    double endTime;
+    static int questionCounter = 0;
 
     public int getCorrectOption() {return correctOption;};
     public void setCorrectOption(int n) {correctOption = n;};
@@ -43,21 +54,30 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Integer radioIdx = intent.getIntExtra(StartActivity.RADIO_CHOSEN, -1);  //-1 is default val
-        Integer questionNum = intent.getIntExtra(StartActivity.QUESTION_NUM,-1);
+        questionNum = intent.getIntExtra(StartActivity.QUESTION_NUM,-1);
+        numCorrect = 0;
+
+        //shuffle dictionary for randomization
+        Collections.shuffle(dictionary);
+
+        //Start Timer
+        startTime = System.currentTimeMillis();
+
         setRadioIdx(radioIdx);
         setNumQuestions(questionNum);
         createScreen(radioIdx);
-
     }
 
-    public int createScreen(int radioIdx) {
+
+    public void createScreen(int radioIdx) {
         Random rand = new Random();
-        int randButton1 = rand.nextInt((3 - 0) + 1) + 0;
-        int randButton2 = rand.nextInt((7 - 4) + 1) + 4;
-        int  randWord = rand.nextInt(dictionary.size()-1);
+        int randButton1 = rand.nextInt(4);
+        int randButton2 = rand.nextInt(4) + 4;
+        //int  randWord = rand.nextInt(dictionary.size()-1);
+        int randWord = questionCounter;
         setCorrectOption(randButton1);
         setCorrectOption2(randButton2);
-        setCurrentWord(randWord);
+        setCurrentWord(questionCounter);
 
         TextView textview = (TextView) findViewById(R.id.word);
         TextView button0 = (TextView) findViewById(R.id.button0);
@@ -106,31 +126,65 @@ public class GameActivity extends AppCompatActivity {
             textview.setText(dictionary.get(randWord).getChineseWord().word);
             createOptionVal(buttonList, randWord, randButton1, randButton2);
         }
-        return randWord;
     }
 
     public void createOptionVal(ArrayList<TextView>list,
                                 int correctWord, int correctButton, int correctButton2) {
 
         String option = " ";
+        ArrayList<Integer> optionList = new ArrayList<Integer>();
+        for (int i = 0; i < 28; i++)
+        {
+            optionList.add(i);
+        }
+        String gong1 = dictionary.get(0).getPinyinWord().word;
+        String gong2 = dictionary.get(2).getPinyinWord().word;
+        boolean hello = gong1.compareTo(gong2) == 0;
+
+
+        Collections.shuffle(optionList);
+        int optionCounter = 0;
+
+
         for (int i = 0; i < list.size(); i++) {
             int a;
             if (i == correctButton || i == correctButton2) {
                 a = correctWord;
             }
             else {
-                Random rand = new Random();
-                int randWord = rand.nextInt(dictionary.size() - 1);
-                a = randWord;
+                a = optionList.get(optionCounter);
+                if (a == correctWord)
+                {
+                    optionCounter++;
+                    a = optionList.get(optionCounter);
+                }
+                optionCounter++;
+
             }
 
             //Question: English, Option Set 1: Chinese, Option Set 2: Pinyin
             if (getRadioIdx()==0) {
                 if (i < 4) {
                     option = dictionary.get(a).getChineseWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getChineseWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getChineseWord().word;
+                        }
+                    }
+
                 }
                 else {
                     option = dictionary.get(a).getPinyinWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getPinyinWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getPinyinWord().word;
+                        }
+                    }
+
                 }
             }
 
@@ -138,9 +192,25 @@ public class GameActivity extends AppCompatActivity {
             else if (getRadioIdx()==1) {
                 if (i < 4) {
                     option = dictionary.get(a).getEnglishWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getEnglishWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getEnglishWord().word;
+                        }
+                    }
+
                 }
                 else {
                     option = dictionary.get(a).getChineseWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getChineseWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getChineseWord().word;
+                        }
+                    }
+
                 }
             }
 
@@ -148,9 +218,23 @@ public class GameActivity extends AppCompatActivity {
             else if (getRadioIdx()==2) {
                 if (i < 4) {
                     option = dictionary.get(a).getEnglishWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getEnglishWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getEnglishWord().word;
+                        }
+                    }
                 }
                 else {
                     option = dictionary.get(a).getPinyinWord().word;
+                    if (a != correctWord)
+                    {
+                        if (option.compareTo(dictionary.get(correctWord).getPinyinWord().word) == 0)
+                        {
+                            option = dictionary.get(a+7).getPinyinWord().word;
+                        }
+                    }
                 }
             }
             list.get(i).setText(option);
@@ -160,6 +244,8 @@ public class GameActivity extends AppCompatActivity {
     public void onOptionClicked(View view) {
 
         int buttonId = -1;
+
+
 
         if (view.getId() == findViewById(R.id.button0).getId()) { buttonId = 0; }
         if (view.getId() == findViewById(R.id.button1).getId()) { buttonId = 1; }
@@ -197,6 +283,7 @@ public class GameActivity extends AppCompatActivity {
                     dictionary.get(getCurrentWord()).getEnglishWord().setNumCorrect(
                             dictionary.get(getCurrentWord()).getEnglishWord().getNumCorrect()+1);
                 }
+                isCorrect1 = true;
             }
 
             //User selects incorrect option
@@ -236,6 +323,7 @@ public class GameActivity extends AppCompatActivity {
                     dictionary.get(getCurrentWord()).getPinyinWord().setNumCorrect(
                             dictionary.get(getCurrentWord()).getPinyinWord().getNumCorrect()+1);
                 }
+                isCorrect2 = true;
             }
 
             else {
@@ -258,17 +346,36 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
+
     }
 
     public void onNextClicked(View view) {
 
         if (getNumQuestions() != 1) {
+            questionCounter++;
             createScreen(getRadioIdx());
             setNumQuestions(getNumQuestions()-1);
+            if (isCorrect1 && isCorrect2)
+            {
+                numCorrect++;
+                dictionary.get(getCurrentWord()).correctWord++;
+            }
+            isCorrect1 = false;
+            isCorrect2 = false;
         }
         else {
+            if (isCorrect1 && isCorrect2)
+            {
+                numCorrect++;
+                dictionary.get(getCurrentWord()).correctWord++;
+            }
+            endTime = System.currentTimeMillis();
+            double timeElasped = endTime - startTime;
             Intent intent = new Intent(this, ResultActivity.class);
-            intent.putExtra("test", 0);
+            intent.putExtra(TIME, timeElasped);
+            intent.putExtra(NUM_QUESTION, questionNum);
+            intent.putExtra(CORRECT, numCorrect);
+
             startActivity(intent);
         }
     }

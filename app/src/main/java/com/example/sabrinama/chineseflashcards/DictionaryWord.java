@@ -10,11 +10,22 @@ public class DictionaryWord {
         Word englishWord;
         int numTried;
 
+    public int getCorrectWord() {
+        return correctWord;
+    }
+
+    public void setCorrectWord(int correctWord) {
+        this.correctWord = correctWord;
+    }
+
+    int correctWord;
+
         public DictionaryWord()
         {
             chineseWord = new Word();
             pinyinWord = new Word();
             englishWord = new Word();
+            correctWord = 0;
         }
 
         public Word getChineseWord() {

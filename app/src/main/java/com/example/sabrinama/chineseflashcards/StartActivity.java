@@ -28,14 +28,18 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        readDictionary task = new readDictionary();
-        task.execute();
-
+        if (!ResultActivity.restart)
+        {
+            readDictionary task = new readDictionary();
+            task.execute();
+        }
         NumberPicker numPick = (NumberPicker) findViewById(R.id.quizSize_Picker);
         numPick.setMinValue(1);
-        numPick.setMaxValue(10);
+        numPick.setMaxValue(24);
+        numPick.setValue(10);
         numPick.setWrapSelectorWheel(true);
     }
+
 
     private class readDictionary extends AsyncTask<Void, Void, Void>
     {
